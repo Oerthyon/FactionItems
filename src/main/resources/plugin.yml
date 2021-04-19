@@ -3,3 +3,8 @@ description: Items supplémentaire pour le mode faction d'Oerthyon
 author: Superkooka
 version: 1.0.0
 main: com.superkooka.oerthyon.factionitems.Main
+
+commands:
+  rtp:
+    description: Permet de se téléporter aléatoirement sur la carte
+    usage: /rtp
