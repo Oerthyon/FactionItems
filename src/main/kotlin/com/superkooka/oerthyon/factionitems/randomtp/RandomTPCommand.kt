@@ -18,6 +18,11 @@ class RandomTPCommand : CommandExecutor {
 
         val player: Player = sender
 
+        if (!player.hasPermission("oerthyon.factionitems.rtp")) {
+            player.sendMessage("Vous n'avez pas la permission d'executer cette commande")
+            return true
+        }
+
         val currentWorld: World = player.world
 
         when(currentWorld.environment) {
