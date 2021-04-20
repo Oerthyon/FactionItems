@@ -2,7 +2,8 @@ name: Build plugin
 on:
   push:
     branches:
-      - *
+      - dev
+      - stable
 jobs:
   gradle:
     runs-on: ubuntu-latest
