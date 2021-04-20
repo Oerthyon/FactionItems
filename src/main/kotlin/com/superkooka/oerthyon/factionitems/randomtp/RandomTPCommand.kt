@@ -1,6 +1,8 @@
 package com.superkooka.oerthyon.factionitems.randomtp
 
+import com.superkooka.oerthyon.factionitems.Main
 import com.superkooka.oerthyon.factionitems.TooManyIterationException
+import com.superkooka.oerthyon.factionitems.utils.StringUtils
 import org.bukkit.Location
 import org.bukkit.World
 import org.bukkit.command.Command
@@ -24,21 +26,24 @@ class RandomTPCommand : CommandExecutor {
         }
 
         val player: Player = sender
+        val messageVariable = HashMap<String, String>()
+        messageVariable["player_name"] = player.displayName
+        messageVariable["dimension"] = player.world.environment.name
 
         if (!player.hasPermission("oerthyon.factionitems.rtp")) {
-            player.sendMessage("Vous n'avez pas la permission d'executer cette commande")
+            player.sendMessage(StringUtils.parse(Main.configuration.getString("random_tp.messages.access_denied"), messageVariable))
             return true
         }
 
         if (!player.hasPermission("oerthyon.factionitems.no_cooldown")) {
-            val cooldown = RandomTPCommand.cooldown[player.uniqueId]
+            val cooldown = RandomTPCommand.cooldown[player.uniqueId] ?: 0
 
-            if (cooldown !== null && cooldown > System.currentTimeMillis()) {
+            if (cooldown > System.currentTimeMillis()) {
                 player.sendMessage("Veuillez attendre " + (cooldown - System.currentTimeMillis()) / 1000 + " secondes")
                 return true
             }
 
-            RandomTPCommand.cooldown[player.uniqueId] = System.currentTimeMillis() + (20 * 1000)
+            RandomTPCommand.cooldown[player.uniqueId] = System.currentTimeMillis() + (Main.configuration.getLong("random_tp.cooldown") * 1000)
         }
 
         val currentWorld: World = player.world
