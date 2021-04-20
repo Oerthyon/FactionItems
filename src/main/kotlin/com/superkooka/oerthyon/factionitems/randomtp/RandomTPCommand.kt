@@ -7,9 +7,16 @@ import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
+import java.util.*
+import kotlin.collections.HashMap
 import kotlin.random.Random
 
 class RandomTPCommand : CommandExecutor {
+
+    companion object {
+        @JvmStatic
+        var cooldown: HashMap<UUID, Long> = HashMap()
+    }
 
     override fun onCommand(sender: CommandSender?, command: Command?, label: String?, args: Array<out String>?): Boolean {
         if (sender !is Player) {
@@ -21,6 +28,17 @@ class RandomTPCommand : CommandExecutor {
         if (!player.hasPermission("oerthyon.factionitems.rtp")) {
             player.sendMessage("Vous n'avez pas la permission d'executer cette commande")
             return true
+        }
+
+        if (!player.hasPermission("oerthyon.factionitems.no_cooldown")) {
+            val cooldown = RandomTPCommand.cooldown[player.uniqueId]
+
+            if (cooldown !== null && cooldown > System.currentTimeMillis()) {
+                player.sendMessage("Veuillez attendre " + (cooldown - System.currentTimeMillis()) / 1000 + " secondes")
+                return true
+            }
+
+            RandomTPCommand.cooldown[player.uniqueId] = System.currentTimeMillis() + (20 * 1000)
         }
 
         val currentWorld: World = player.world
