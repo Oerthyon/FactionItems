@@ -1,0 +1,27 @@
+name: Build plugin
+on:
+  push:
+    branches:
+      - dev
+      - stable
+jobs:
+  gradle:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: chmod +x gradlew
+      - uses: actions/setup-java@v1
+        with:
+          java-version: 8
+      - uses: eskatos/gradle-command-action@v1
+        with:
+          arguments: shadowJar
+      - uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          tag: ${{ github.ref }}
+          file: build/oerthyon-faction-items-*.*.jar
+          asset_name: oerthyon-faction.jar
+          overwrite: true
+          prerelease: true
+          file_glob: true
