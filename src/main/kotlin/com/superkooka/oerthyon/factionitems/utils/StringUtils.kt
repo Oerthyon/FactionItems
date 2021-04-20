@@ -15,11 +15,9 @@ class StringUtils {
                         isVariable = false
                         variableName = variableName.dropLast(1)
                         parsedString += vars[variableName] ?: ""
-                    }
-                    else if (isVariable) {
+                    } else if (isVariable) {
                         variableName += char
-                    }
-                    else if ('{' == char && '{' == previousChar) {
+                    } else if ('{' == char && '{' == previousChar) {
                         parsedString = parsedString.dropLast(1)
                         isVariable = true
                     } else {

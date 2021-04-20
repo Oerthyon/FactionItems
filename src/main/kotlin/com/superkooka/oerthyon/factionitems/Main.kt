@@ -14,7 +14,7 @@ class Main : JavaPlugin() {
     }
 
     override fun onEnable() {
-        configuration.load(FileInputStream(File( this.dataFolder, "config.yml")))
+        configuration.load(FileInputStream(File(this.dataFolder, "config.yml")))
         this.getCommand("rtp").executor = RandomTPCommand()
     }
 }
