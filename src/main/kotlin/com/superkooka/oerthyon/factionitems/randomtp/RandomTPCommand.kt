@@ -31,7 +31,7 @@ class RandomTPCommand : CommandExecutor {
         messageVariable["dimension"] = player.world.environment.name
 
         if (!player.hasPermission("oerthyon.factionitems.rtp")) {
-            player.sendMessage(StringUtils.parse(Main.configuration.getString("random_tp.messages.access_denied"), messageVariable))
+            player.sendMessage(StringUtils.parse(Main.configuration.getString("random_tp.messages.not_enough_permission", "Vous n'avez pas la permission d'executer cette commande"), messageVariable))
             return true
         }
 
@@ -39,11 +39,12 @@ class RandomTPCommand : CommandExecutor {
             val cooldown = RandomTPCommand.cooldown[player.uniqueId] ?: 0
 
             if (cooldown > System.currentTimeMillis()) {
-                player.sendMessage("Veuillez attendre " + (cooldown - System.currentTimeMillis()) / 1000 + " secondes")
+                messageVariable["cooldown_remaining"] = ((cooldown - System.currentTimeMillis()) / 1000).toString()
+                player.sendMessage(StringUtils.parse(Main.configuration.getString("random_tp.messages.cooldown_unfinished", "Veuillez attendre {{cooldown_remaining}} secondes"), messageVariable))
                 return true
             }
 
-            RandomTPCommand.cooldown[player.uniqueId] = System.currentTimeMillis() + (Main.configuration.getLong("random_tp.cooldown") * 1000)
+            RandomTPCommand.cooldown[player.uniqueId] = System.currentTimeMillis() + (Main.configuration.getLong("random_tp.cooldown", 10) * 1000)
         }
 
         val currentWorld: World = player.world
@@ -53,18 +54,18 @@ class RandomTPCommand : CommandExecutor {
                 try {
                     player.teleport(this.findValidLocationInOverworld(currentWorld))
                 } catch (e: TooManyIterationException) {
-                    player.sendMessage("Impossible de trouver un endroit où vous téléporter")
+                    player.sendMessage(StringUtils.parse(Main.configuration.getString("random_tp.messages.unable_to_find_location", "Impossible de trouver un endroit où vous téléporter"), messageVariable))
                 }
             }
             World.Environment.NETHER -> {
                 try {
                     player.teleport(this.findValidLocationInNether(currentWorld))
                 } catch (e: TooManyIterationException) {
-                    player.sendMessage("Impossible de trouver un endroit où vous téléporter")
+                    player.sendMessage(StringUtils.parse(Main.configuration.getString("random_tp.messages.unable_to_find_location", "Impossible de trouver un endroit où vous téléporter"), messageVariable))
                 }
             }
             else -> {
-                player.sendMessage("Vous devez être dans l'overworld ou le nether pour utiliser cette commande")
+                player.sendMessage(StringUtils.parse(Main.configuration.getString("random_tp.messages.bad_dimension", "Vous devez être dans l'overworld ou le nether pour utiliser cette commande"), messageVariable))
             }
         }
 
@@ -73,12 +74,12 @@ class RandomTPCommand : CommandExecutor {
 
     private fun findValidLocationInOverworld(world: World): Location {
         val location = Location(world, 0.0, 0.0, 0.0)
-        val maxIteration = 100000
+        val maxIteration = Main.configuration.getInt("random_tp.max_iteration_before_finding_position", 100000)
 
         var i = 0
         while (maxIteration >= i) {
-            location.x = Random.nextDouble(-100.0,100.0)
-            location.z = Random.nextDouble(-100.0, 100.0)
+            location.x = Random.nextDouble(Main.configuration.getDouble("random_tp.overworld.min_x", -1000.0), Main.configuration.getDouble("random_tp.overworld.max_x", 1000.0))
+            location.z = Random.nextDouble(Main.configuration.getDouble("random_tp.overworld.min_z", -1000.0), Main.configuration.getDouble("random_tp.overworld.max_z", -1000.0))
             location.y = world.getHighestBlockYAt(location.x.toInt(), location.z.toInt()) + 1.0
 
             if (location.block.type.isSolid) {
@@ -93,12 +94,12 @@ class RandomTPCommand : CommandExecutor {
 
     private fun findValidLocationInNether(world: World): Location {
         val location = Location(world, 0.0, 0.0, 0.0)
-        val maxIteration = 100000
+        val maxIteration = Main.configuration.getInt("random_tp.max_iteration_before_finding_position", 100000)
 
         var i = 0
         while (maxIteration >= i) {
-            location.x = Random.nextDouble(-100.0,100.0)
-            location.z = Random.nextDouble(-100.0, 100.0)
+            location.x = Random.nextDouble(Main.configuration.getDouble("random_tp.nether.min_x", -1000.0), Main.configuration.getDouble("random_tp.nether.max_x", 1000.0))
+            location.z = Random.nextDouble(Main.configuration.getDouble("random_tp.nether.min_z", -1000.0), Main.configuration.getDouble("random_tp.nether.max_z", -1000.0))
 
             var j = 0
             while (126 > j) {
