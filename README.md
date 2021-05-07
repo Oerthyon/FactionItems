@@ -43,12 +43,29 @@ random_tp:
 * ``oerthyon.factionitems.rtp`` octrois la permission de ce "randomtp"
 * ``oerthyon.factionitems.rtp.no_cooldown`` permet de en pas avoir de cooldown sur la commande.
 
-### Chunkbuster (``/chunkbuster give <pseudo>``)
-Permet de casser un chunk un chunk jusqu'à la bedrock (laisse un trou jusqu'en couche ~=3)
+### Chunkbuster (``/chunkbuster give <pseudo>`` // ``/chunkbuster bust <x> <z>``)
+Permet de casser un chunk jusqu'à la bedrock. 
+
+La commande give donne une frame de portail de l'end, qui, avec un clique droit à la fin d'un countdown va casser le chunk jusqu'a la bedrock. Utilisable uniquement dans sa faction (sauf avec la permission)
+
+La commande bust va détruire le chunk de coordonnée x et z.
+
+#### Configuration
+
+````yaml
+chunkbuster:
+  countdown: 4 # Exprimer en seconde
+  messages:
+    # Variable disponible de manière global: player_name, 
+    not_enough_permission: "Vous n'avez pas la permission d'executer cette commande"
+    bad_dimension: "Vous devez être dans l'overworld afin d'utiliser le chunkbuster"
+````
 
 #### Permission
-* ``oerthyon.factionitems.chunkbuster.give`` donne la permission de donner a un joueur (et soit même) cette chunkbuster.
+* ``oerthyon.factionitems.chunkbuster.give`` donne la permission de donner le chunkbuster.
 * ``oerthyon.factionitems.chunkbuster.use`` donne la permission d'utiliser cette chunkbuster.
+* ``oerthyon.factionitems.chunknbuster.bust_command`` donne la permission d'utiliser ``/chunkbuster bust <x> <z>``.
+* ``oerthyon.factionitems.chunkbuster.use_everywhere`` donne la permission d'utiliser un chunkbuster partout, même hors de sa faction.
 
 ### Dynamite (``/dynamite give <pseudo>``)
 Permet de tout casse dans un rayon donné.
