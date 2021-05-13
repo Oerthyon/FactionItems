@@ -3,8 +3,53 @@ description: Items supplémentaire pour le mode faction d'Oerthyon
 author: Superkooka
 version: 1.0.0
 main: com.superkooka.oerthyon.factionitems.Main
+api-version: 1.8
+website: github.com/Oerthyon/FactionItems
+
+depend:
+  - HolographicDisplays
+
+softdepend:
+  - Factions
 
 commands:
   rtp:
     description: Permet de se téléporter aléatoirement sur la carte
     usage: /rtp
+  chunkbuster:
+    description: Permet de recuperer un chunkblister
+    usage: /chunkbuster
+
+default-permission: op
+
+permissions:
+  oerthyon.factionitems.*:
+    description: Toutes les permissions du plugin
+    default: op
+    children:
+      oerthyon.factionitems.chunkbuster.*: true
+
+  oerthyon.factionitems.chunkbuster.*:
+    description: Toutes les permissions du chunkbuster
+    default: op
+    children:
+      oerthyon.factionitems.chunkbuster.give: true
+      oerthyon.factionitems.chunkbuster.use: true
+      oerthyon.factionitems.chunkbuster.bust_command: true
+      oerthyon.factionitems.chunkbuster.use_everywhere: true
+
+  oerthyon.factionitems.chunkbuster.give:
+    description: donne la permission de donner le chunkbuster.
+    default: op
+
+  oerthyon.factionitems.chunkbuster.use:
+    description: donne la permission d'utiliser cette chunkbuster.
+    default: true
+
+  oerthyon.factionitems.chunkbuster.bust_command:
+    description: donne la permission d'utiliser /chunkbuster bust <x> <z>.
+    default: op
+
+  oerthyon.factionitems.chunkbuster.use_everywhere:
+    description: donne la permission d'utiliser un chunkbuster partout, même hors de sa faction.
+    default: op

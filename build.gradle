@@ -15,9 +15,23 @@ archivesBaseName = 'oerthyon-faction-items'
 repositories {
     mavenCentral()
     mavenLocal()
+
     maven { url = 'https://oss.sonatype.org/content/repositories/snapshots' }
     maven { url = 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/' }
     maven { url 'https://dl.bintray.com/kotlin/kotlin-eap' }
+    maven { url 'https://repo.codemc.io/repository/maven-public/' }
+    maven { url 'https://ci.ender.zone/plugin/repository/everything/' }
+
+    maven { url 'https://github.com/factions-site/repo/raw/public' }
+    maven { url 'https://papermc.io/repo/repository/maven-public/' }
+    maven { url 'https://hub.spigotmc.org/nexus/content/groups/public/' }
+    maven { url 'http://maven.sk89q.com/repo/' }
+    maven { url 'http://repo.mikeprimm.com/' }
+    maven { url 'https://repo.spongepowered.org/maven' }
+    maven { url 'https://repo.citizensnpcs.co' }
+    maven { url 'https://repo.extendedclip.com/content/repositories/placeholderapi/' }
+    maven { url 'http://nexus.hc.to/content/repositories/pub_releases' }
+    maven { url 'https://libraries.minecraft.net' }
 }
 
 compileKotlin {
@@ -31,9 +45,11 @@ tasks.withType(JavaCompile) {
 }
 
 dependencies {
-    compileOnly group: 'org.spigotmc', name: 'spigot-api', version: '1.8.8-R0.1-SNAPSHOT'
+    compileOnly group: 'org.spigotmc', name: 'spigot', version: '1.8.8-R0.1-SNAPSHOT'
+    compileOnly group: 'com.gmail.filoghost.holographicdisplays', name:'holographicdisplays-api', version: '2.4.0'
+    compileOnly group: 'com.massivecraft', name: 'Factions', version: '1.6.9.5-U0.5.21'
 
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.5.0"
 }
 
 shadowJar {

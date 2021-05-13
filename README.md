@@ -58,7 +58,8 @@ chunkbuster:
   messages:
     # Variable disponible de manière global: player_name, 
     not_enough_permission: "Vous n'avez pas la permission d'executer cette commande"
-    bad_dimension: "Vous devez être dans l'overworld afin d'utiliser le chunkbuster"
+    not_enough_permission_to_place_it: "Vous avez pas la permission de placer ce chunkbuster"
+    already_active: "§l§4Attention...§r Ce chunkbuster est déjà prêt à exploser"
 ````
 
 #### Permission

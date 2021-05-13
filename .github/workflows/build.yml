@@ -21,7 +21,7 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           tag: ${{ github.ref }}
           file: build/oerthyon-faction-items-*.*.jar
-          asset_name: oerthyon-faction.jar
+          asset_name: oerthyon-faction-items.jar
           overwrite: true
           prerelease: true
           file_glob: true
