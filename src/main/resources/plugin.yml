@@ -1,6 +1,6 @@
 name: Factionitems
 description: Items supplémentaire pour le mode faction d'Oerthyon
-author: Superkooka
+author: Superkooka <aymeric.gueracague@gmail.com>
 version: 1.0.0
 main: com.superkooka.oerthyon.factionitems.Main
 api-version: 1.8
