@@ -19,6 +19,9 @@ commands:
   chunkbuster:
     description: Permet de recuperer un chunkblister
     usage: /chunkbuster
+  dynamite:
+    description: Permet de recuperer une dynamite
+    usage: /dynamite
 
 default-permission: op
 
@@ -28,6 +31,8 @@ permissions:
     default: op
     children:
       oerthyon.factionitems.chunkbuster.*: true
+      oethyon.factionitems.dynamite.*: true
+
 
   oerthyon.factionitems.chunkbuster.*:
     description: Toutes les permissions du chunkbuster
@@ -53,3 +58,19 @@ permissions:
   oerthyon.factionitems.chunkbuster.use_everywhere:
     description: donne la permission d'utiliser un chunkbuster partout, même hors de sa faction.
     default: op
+
+  oethyon.factionitems.dynamite.*:
+    description: donne toute les permisssions lié au dynamite
+    default: op
+    children:
+      oerthyon.factionitems.dynamite.give: true
+      oerthyon.factionitems.dynamite.use: true
+
+
+  oethyon.factionitems.dynamite.give:
+    description: donne la permission give une dynamite
+    default: op
+
+  oethyon.factionitems.dynamite.use:
+    description: donne la permission d'utiliser une dynamite
+    default: true

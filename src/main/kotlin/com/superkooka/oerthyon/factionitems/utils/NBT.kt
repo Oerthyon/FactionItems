@@ -17,6 +17,6 @@ object NBT {
 
     fun get(item: ItemStack, key: String): String? {
         val stack: net.minecraft.server.v1_8_R3.ItemStack = CraftItemStack.asNMSCopy(item)
-        return if (stack.tag != null) stack.tag.getString(key) else null
+        return stack.tag?.getString(key)
     }
 }

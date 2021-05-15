@@ -1,6 +1,9 @@
 package com.superkooka.oerthyon.factionitems
 
 import com.superkooka.oerthyon.factionitems.chunkbuster.*
+import com.superkooka.oerthyon.factionitems.dynamite.DynamitePlaceListener
+import com.superkooka.oerthyon.factionitems.dynamite.DynamiteCommand
+import com.superkooka.oerthyon.factionitems.dynamite.DynamiteDestroyListener
 import com.superkooka.oerthyon.factionitems.randomtp.RandomTPCommand
 import com.superkooka.oerthyon.factionitems.utils.Utf8YamlConfiguration
 import org.bukkit.Bukkit
@@ -36,10 +39,13 @@ class Main : JavaPlugin() {
 
         this.getCommand("rtp").executor = RandomTPCommand()
         this.getCommand("chunkbuster").executor = ChunkbusterCommand()
+        this.getCommand("dynamite").executor = DynamiteCommand()
 
         Bukkit.getPluginManager().registerEvents(ChunkbusterPlaceListener(), this)
         Bukkit.getPluginManager().registerEvents(ChunkbusterActivationListener(), this)
         Bukkit.getPluginManager().registerEvents(ChunkbusterDestroyListener(), this)
+        Bukkit.getPluginManager().registerEvents(DynamitePlaceListener(), this)
+        Bukkit.getPluginManager().registerEvents(DynamiteDestroyListener(), this)
     }
 
     override fun onDisable() {
