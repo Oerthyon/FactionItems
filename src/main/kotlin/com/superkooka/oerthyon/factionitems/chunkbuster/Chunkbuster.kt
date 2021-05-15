@@ -48,10 +48,10 @@ object Chunkbuster {
     @JvmStatic
     fun burst(location: Location) {
         val xMin = location.chunk.x shl 4
-        val xMax = (location.chunk.x shl 4) + 16
+        val xMax = (location.chunk.x shl 4) + 15
 
         val zMin = location.chunk.z shl 4
-        val zMax = (location.chunk.z shl 4) + 16
+        val zMax = (location.chunk.z shl 4) + 15
 
         for (x in xMin..xMax) {
             for (y in 0..256) {
