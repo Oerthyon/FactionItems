@@ -15,7 +15,7 @@ dossier ``./build``.
 ## Documentation
 
 Au niveau de la configuration, dans les chaines de caractères vous pouvez utiliser des variables de la
-forme ``{{nom_de_la_variable}}``. Elles sont détailer dans la documentation de chaque section
+forme ``{{nom_de_la_variable}}``. Elles sont détaillées dans la documentation de chaque section
 
 Pour les permissions le fichier plugin.yml contient toutes les descriptions.
 
@@ -82,6 +82,6 @@ dynamite:
   fire: true
   messages:
     # Variable disponible de manière global: player_name, 
-    not_enough_permission: Vous n'avez pas la permission d'executer cette commande
+    not_enough_permission: Vous n'avez pas la permission d'executer cette dynamite
     placeholder: Explosion dans §l§4{{countdown}}§r secondes
 ````
