@@ -56,6 +56,7 @@ class ChunkbusterCommand : CommandExecutor {
                             ), messageVariable
                         )
                     )
+                    return true
                 }
 
                 Chunkbuster.burst(Location(player.world, args[1].toDouble(), 0.0, args[2].toDouble()))
