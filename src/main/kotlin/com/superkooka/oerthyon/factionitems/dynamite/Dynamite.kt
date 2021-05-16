@@ -4,17 +4,15 @@ import com.superkooka.oerthyon.factionitems.Main
 import com.superkooka.oerthyon.factionitems.utils.NBT
 import org.bukkit.Location
 import org.bukkit.Material
-import org.bukkit.block.Block
+import org.bukkit.entity.EntityType
+import org.bukkit.entity.TNTPrimed
 import org.bukkit.inventory.ItemStack
 import org.bukkit.metadata.FixedMetadataValue
 
 object Dynamite {
 
     @JvmStatic
-    val placed_dynamite: ArrayList<Location> = ArrayList()
-
-    @JvmStatic
-    fun giveOne(power: Float, fire: Boolean): ItemStack {
+    fun giveOne(radius: Float, fire: Boolean): ItemStack {
         var item = ItemStack(Material.TNT)
 
         val itemMeta = item.itemMeta
@@ -22,7 +20,8 @@ object Dynamite {
         item.itemMeta = itemMeta
 
         item = NBT.set(item, "oerthyon.item_type", "dynamite")
-        item = NBT.set(item, "oerthyon.dynamite.power", power.toString())
+        item = NBT.set(item, "oerthyon.dynamite.countdown", Main.configuration.getString("dynamite.countdown", "4"))
+        item = NBT.set(item, "oerthyon.dynamite.radius", radius.toString())
         return NBT.set(item, "oerthyon.dynamite.fire", fire.toString())
     }
 
@@ -36,29 +35,20 @@ object Dynamite {
         return items
     }
 
-    fun place(location: Location) {
-        location.block.setMetadata("oerthyon.item_type", FixedMetadataValue(Main.instance, "dynamite"))
-        placed_dynamite.add(location)
-    }
+    fun place(location: Location, item: ItemStack) {
+        val tnt: TNTPrimed = location.world.spawnEntity(location, EntityType.PRIMED_TNT) as TNTPrimed
+        tnt.fuseTicks = (NBT.get(item, "oerthyon.dynamite.countdown")?.toIntOrNull() ?: 4) * 20
 
-    @JvmStatic
-    fun explode(location: Location, item: ItemStack) {
-        if (!isDynamite(item)) return
-
-        val power = NBT.get(item, "oerthyon.dynamite.power")?.toFloat() ?: return
-        val fire = NBT.get(item, "oerthyon.dynamite.fire")?.toBoolean() ?: return
-
-        location.world.getBlockAt(location).type = Material.AIR
-        placed_dynamite.remove(location)
-
-        location.world.createExplosion(location, power, fire)
+        tnt.setMetadata("oerthyon.item_type", FixedMetadataValue(Main.instance, "dynamite"))
+        tnt.setMetadata("oerthyon.dynamite.fire", FixedMetadataValue(Main.instance, NBT.get(item, "oerthyon.dynamite.fire")))
+        tnt.setMetadata("oerthyon.dynamite.radius", FixedMetadataValue(Main.instance, NBT.get(item, "oerthyon.dynamite.radius")))
     }
 
     @JvmStatic
     fun isDynamite(obj: Any?): Boolean {
         return when (obj) {
             is ItemStack -> "dynamite" == NBT.get(obj, "oerthyon.item_type")
-            is Block -> "dynamite" == obj.getMetadata("oerthyon.item_type").firstOrNull()?.asString()
+            is TNTPrimed -> "dynamite" == obj.getMetadata("oerthyon.item_type").firstOrNull()?.asString()
             else -> null
         } ?: return false
     }
