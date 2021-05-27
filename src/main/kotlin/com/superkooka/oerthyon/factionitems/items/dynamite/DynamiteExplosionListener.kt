@@ -1,9 +1,8 @@
-package com.superkooka.oerthyon.factionitems.dynamite
+package com.superkooka.oerthyon.factionitems.items.dynamite
 
 import org.bukkit.entity.TNTPrimed
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
-import org.bukkit.event.block.BlockBreakEvent
 import org.bukkit.event.entity.ExplosionPrimeEvent
 
 class DynamiteExplosionListener : Listener {

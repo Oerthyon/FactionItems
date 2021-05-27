@@ -47,7 +47,7 @@ random_tp:
   max_iteration_before_finding_position: 100000
 ````
 
-### Chunkbuster (``/chunkbuster give [pseudo] [amount]`` // ``/chunkbuster bust <x> <z>``)
+### Chunkbuster (``/factionitems give <pseudo> chunkbuster [amount]``)
 
 Permet de casser un chunk jusqu'à la bedrock.
 
@@ -69,7 +69,7 @@ chunkbuster:
     already_active: §l§4Attention...§r Ce chunkbuster est déjà prêt à exploser
 ````
 
-### Dynamite (``/dynamite give [pseudo] [amount] [power]``)
+### Dynamite (``/factionitems give <pseudo> dynamite [amount] [radius] [fire]``)
 
 Permet de tout casser dans un rayon donné.
 
@@ -85,3 +85,37 @@ dynamite:
     not_enough_permission: Vous n'avez pas la permission d'executer cette dynamite
     placeholder: Explosion dans §l§4{{countdown}}§r secondes
 ````
+
+### Pioche
+
+#### Pioche Epique ``(/factionitems give <pseudo> pickaxe:epic [amount])``
+
+- Efficiency 3; Unbreaking 3
+- Cuit les minerais automatiquement
+- Mine en 3x3
+
+#### Pioche Légendaire ``(/factionitems give <pseudo> pickaxe:legendary [amount])``
+
+- Efficiency 5; Unbreaking 3; Fortune 2
+- Cuit les minerais automatiquement
+- Mine en 5x5
+
+### Epée
+
+#### Epée Epique ``(/factionitems give <pseudo> sword:epic [amount])``
+
+- Chatiment 5; Unbreaking 3; Looting 5
+
+### Houe
+
+#### Houe Epique ``(/factionitems give <pseudo> houe:epic [amount])``
+
+- Accélération sur la soul sand
+- Replentation auto en 3x3
+- Unbreaking 3
+
+#### Houe Légendaire ``(/factionitems give <pseudo> houe:legndary [amount])``
+
+- Accélération sur la soul sand
+- Replantation auto en 5x5
+- Unbreaking

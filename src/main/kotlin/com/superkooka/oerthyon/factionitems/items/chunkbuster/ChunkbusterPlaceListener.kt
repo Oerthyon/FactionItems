@@ -1,4 +1,4 @@
-package com.superkooka.oerthyon.factionitems.chunkbuster
+package com.superkooka.oerthyon.factionitems.items.chunkbuster
 
 import com.massivecraft.factions.*
 import com.superkooka.oerthyon.factionitems.Main

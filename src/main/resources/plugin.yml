@@ -16,12 +16,9 @@ commands:
   rtp:
     description: Permet de se téléporter aléatoirement sur la carte
     usage: /rtp
-  chunkbuster:
-    description: Permet de recuperer un chunkblister
-    usage: /chunkbuster
-  dynamite:
-    description: Permet de recuperer une dynamite
-    usage: /dynamite
+  factionitems:
+    description: Permet de recuperer les items spécifique au faction
+    usage: /factionitems give <pseudo> <item> [amount] [...options]
 
 default-permission: op
 

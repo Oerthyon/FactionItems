@@ -1,4 +1,4 @@
-package com.superkooka.oerthyon.factionitems.chunkbuster
+package com.superkooka.oerthyon.factionitems.items.chunkbuster
 
 import com.superkooka.oerthyon.factionitems.Main
 import com.superkooka.oerthyon.factionitems.utils.NBT
@@ -13,7 +13,7 @@ object Chunkbuster {
     val placed_chunkbuster: HashMap<Location, Boolean> = HashMap()
 
     @JvmStatic
-    fun giveOne(): ItemStack {
+    fun give(): ItemStack {
         val item = ItemStack(Material.ENDER_PORTAL_FRAME)
 
         val itemMeta = item.itemMeta

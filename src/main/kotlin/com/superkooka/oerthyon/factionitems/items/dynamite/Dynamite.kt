@@ -1,4 +1,4 @@
-package com.superkooka.oerthyon.factionitems.dynamite
+package com.superkooka.oerthyon.factionitems.items.dynamite
 
 import com.superkooka.oerthyon.factionitems.Main
 import com.superkooka.oerthyon.factionitems.utils.NBT
@@ -12,7 +12,7 @@ import org.bukkit.metadata.FixedMetadataValue
 object Dynamite {
 
     @JvmStatic
-    fun giveOne(radius: Float, fire: Boolean): ItemStack {
+    fun give(radius: Float, fire: Boolean): ItemStack {
         var item = ItemStack(Material.TNT)
 
         val itemMeta = item.itemMeta
@@ -23,16 +23,6 @@ object Dynamite {
         item = NBT.set(item, "oerthyon.dynamite.countdown", Main.configuration.getString("dynamite.countdown", "4"))
         item = NBT.set(item, "oerthyon.dynamite.radius", radius.toString())
         return NBT.set(item, "oerthyon.dynamite.fire", fire.toString())
-    }
-
-    fun giveMany(amount: Int, power: Float, fire: Boolean): ArrayList<ItemStack> {
-        val items = ArrayList<ItemStack>()
-
-        for (i in 1..amount) {
-            items.add(giveOne(power, fire))
-        }
-
-        return items
     }
 
     fun place(location: Location, item: ItemStack) {

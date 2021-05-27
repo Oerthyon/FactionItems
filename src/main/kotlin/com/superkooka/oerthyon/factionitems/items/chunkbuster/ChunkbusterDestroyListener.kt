@@ -1,4 +1,4 @@
-package com.superkooka.oerthyon.factionitems.chunkbuster
+package com.superkooka.oerthyon.factionitems.items.chunkbuster
 
 import com.superkooka.oerthyon.factionitems.Main
 import com.superkooka.oerthyon.factionitems.utils.StringUtils
@@ -51,6 +51,6 @@ class ChunkbusterDestroyListener : Listener {
 
         Chunkbuster.placed_chunkbuster.remove(location)
         location.world.getBlockAt(location).type = Material.AIR
-        location.world.dropItem(location, Chunkbuster.giveOne())
+        location.world.dropItem(location, Chunkbuster.give())
     }
 }

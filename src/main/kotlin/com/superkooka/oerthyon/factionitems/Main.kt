@@ -1,9 +1,9 @@
 package com.superkooka.oerthyon.factionitems
 
-import com.superkooka.oerthyon.factionitems.chunkbuster.*
-import com.superkooka.oerthyon.factionitems.dynamite.DynamitePlaceListener
-import com.superkooka.oerthyon.factionitems.dynamite.DynamiteCommand
-import com.superkooka.oerthyon.factionitems.dynamite.DynamiteExplosionListener
+import com.superkooka.oerthyon.factionitems.items.ItemsCommand
+import com.superkooka.oerthyon.factionitems.items.chunkbuster.*
+import com.superkooka.oerthyon.factionitems.items.dynamite.DynamitePlaceListener
+import com.superkooka.oerthyon.factionitems.items.dynamite.DynamiteExplosionListener
 import com.superkooka.oerthyon.factionitems.randomtp.RandomTPCommand
 import com.superkooka.oerthyon.factionitems.utils.Utf8YamlConfiguration
 import org.bukkit.Bukkit
@@ -38,8 +38,7 @@ class Main : JavaPlugin() {
         file.delete()
 
         this.getCommand("rtp").executor = RandomTPCommand()
-        this.getCommand("chunkbuster").executor = ChunkbusterCommand()
-        this.getCommand("dynamite").executor = DynamiteCommand()
+        this.getCommand("factionitems").executor = ItemsCommand()
 
         Bukkit.getPluginManager().registerEvents(ChunkbusterPlaceListener(), this)
         Bukkit.getPluginManager().registerEvents(ChunkbusterActivationListener(), this)
