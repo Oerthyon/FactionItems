@@ -4,6 +4,7 @@ import com.superkooka.oerthyon.factionitems.ItemNotFoundException
 import com.superkooka.oerthyon.factionitems.Main
 import com.superkooka.oerthyon.factionitems.items.chunkbuster.Chunkbuster
 import com.superkooka.oerthyon.factionitems.items.dynamite.Dynamite
+import com.superkooka.oerthyon.factionitems.items.sword.EpicSword
 import org.bukkit.Bukkit
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
@@ -79,6 +80,7 @@ class ItemsCommand : CommandExecutor {
                     (options.getOrNull(0)?.toFloat() ?: Main.configuration.getDouble("", 4.0).toFloat()),
                     (options.getOrNull(1)?.toBoolean() ?: Main.configuration.getBoolean("", true)),
                 )
+                "sword:epic" -> EpicSword.give()
                 else -> throw ItemNotFoundException()
             }
         }
