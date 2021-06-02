@@ -19,6 +19,15 @@ forme ``{{nom_de_la_variable}}``. Elles sont détaillées dans la documentation 
 
 Pour les permissions le fichier plugin.yml contient toutes les descriptions.
 
+#### Configuration global
+
+````yaml
+messages:
+  # Variable disponible de manière global: player_name,
+  # TODO: use global "messages.not_enough_permission" everywhere on code
+  not_enough_permission: "Vous n'avez pas la permission d'executer cette commande"
+````
+
 ### RandomTP (``/rtp [pseudo]``)
 
 Permet de se téléporter aléatoirement sur la map.

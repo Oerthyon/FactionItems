@@ -29,6 +29,8 @@ permissions:
     children:
       oerthyon.factionitems.chunkbuster.*: true
       oethyon.factionitems.dynamite.*: true
+      oerthyon.factionitems.sword.*: true
+      oerthyon.factionitems.pickaxe.*: true
 
 
   oerthyon.factionitems.chunkbuster.*:
@@ -70,4 +72,63 @@ permissions:
 
   oethyon.factionitems.dynamite.use:
     description: donne la permission d'utiliser une dynamite
+    default: true
+
+  oerthyon.factionitems.sword.*:
+    description: donne toutes les permissions liée aux épées
+    default: op
+    children:
+      oerthyon.factionitems.sword.epic.*: true
+
+  oerthyon.factionitems.sword.epic.*:
+    description: donne toutes les permissions liée aux épées epic
+    default: op
+    children:
+      oerthyon.factionitems.sword.epic.give: true
+      oerthyon.factionitems.sword.epic.use: true
+
+  oerthyon.factionitems.sword.epic.give:
+    description: donne la permission de se give une épée epic
+    default: false
+
+  oerthyon.factionitems.sword.epic.use:
+    description: donne la permission d'utiliser une épée epic
+    default: true
+
+
+  oerthyon.factionitems.pickaxe.*:
+    description: donne toutes les permissions lié aux pioches
+    default: op
+    children:
+      oerthyon.factionitems.pickaxe.epic.*: true
+      oerthyon.factionitems.pickaxe.legendary.*: true
+
+  oerthyon.factionitems.pickaxe.epic.*:
+    description: donne toutes les permissions lié aux pioches epic
+    default: op
+    children:
+      oerthyon.factionitems.pickaxe.epic.give: true
+      oerthyon.factionitems.pickaxe.epic.use: true
+
+  oerthyon.factionitems.pickaxe.epic.give:
+    description: donne la permission de se give une pioche epic
+    default: false
+
+  oerthyon.factionitems.pickaxe.epic.use:
+    description: donne la permission d'utiliser une pioche epic
+    default: true
+
+  oerthyon.factionitems.pickaxe.legendary.*:
+    description: donne toutes les permissions lié aux pioches legendaire
+    default: op
+    children:
+      oerthyon.factionitems.pickaxe.legendary.give: true
+      oerthyon.factionitems.pickaxe.legendary.use: true
+
+  oerthyon.factionitems.pickaxe.legendary.give:
+    description: donne la permission de se give une pioche legendary
+    default: false
+
+  oerthyon.factionitems.pickaxe.legendary.use:
+    description: donne la permission d'utiliser une pioche legendary
     default: true

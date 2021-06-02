@@ -4,6 +4,7 @@ import com.superkooka.oerthyon.factionitems.items.ItemsCommand
 import com.superkooka.oerthyon.factionitems.items.chunkbuster.*
 import com.superkooka.oerthyon.factionitems.items.dynamite.DynamitePlaceListener
 import com.superkooka.oerthyon.factionitems.items.dynamite.DynamiteExplosionListener
+import com.superkooka.oerthyon.factionitems.items.pickaxe.PickaxeBreakBlockListener
 import com.superkooka.oerthyon.factionitems.randomtp.RandomTPCommand
 import com.superkooka.oerthyon.factionitems.utils.Utf8YamlConfiguration
 import org.bukkit.Bukkit
@@ -46,6 +47,8 @@ class Main : JavaPlugin() {
 
         Bukkit.getPluginManager().registerEvents(DynamitePlaceListener(), this)
         Bukkit.getPluginManager().registerEvents(DynamiteExplosionListener(), this)
+
+        Bukkit.getPluginManager().registerEvents(PickaxeBreakBlockListener(), this)
     }
 
     override fun onDisable() {
