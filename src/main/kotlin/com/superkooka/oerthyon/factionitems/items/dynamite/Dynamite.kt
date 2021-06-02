@@ -25,6 +25,7 @@ object Dynamite {
         return NBT.set(item, "oerthyon.dynamite.fire", fire.toString())
     }
 
+    @JvmStatic
     fun place(location: Location, item: ItemStack) {
         val tnt: TNTPrimed = location.world.spawnEntity(location, EntityType.PRIMED_TNT) as TNTPrimed
         tnt.fuseTicks = (NBT.get(item, "oerthyon.dynamite.countdown")?.toIntOrNull() ?: 4) * 20
