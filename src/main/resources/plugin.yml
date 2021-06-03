@@ -31,7 +31,7 @@ permissions:
       oethyon.factionitems.dynamite.*: true
       oerthyon.factionitems.sword.*: true
       oerthyon.factionitems.pickaxe.*: true
-
+      oerthyon.factionitems.hoe.*: true
 
   oerthyon.factionitems.chunkbuster.*:
     description: Toutes les permissions du chunkbuster
@@ -65,7 +65,6 @@ permissions:
       oerthyon.factionitems.dynamite.give: true
       oerthyon.factionitems.dynamite.use: true
 
-
   oethyon.factionitems.dynamite.give:
     description: donne la permission give une dynamite
     default: op
@@ -94,7 +93,6 @@ permissions:
   oerthyon.factionitems.sword.epic.use:
     description: donne la permission d'utiliser une épée epic
     default: true
-
 
   oerthyon.factionitems.pickaxe.*:
     description: donne toutes les permissions lié aux pioches
@@ -131,4 +129,41 @@ permissions:
 
   oerthyon.factionitems.pickaxe.legendary.use:
     description: donne la permission d'utiliser une pioche legendary
+    default: true
+
+  oerthyon.factionitems.hoe.*:
+    description: donne toutes les permissions lié aux houes
+    default: op
+    children:
+      oerthyon.factionitems.hoe.epic.*: true
+      oerthyon.factionitems.hoe.legendary.*: true
+
+  oerthyon.factionitems.hoe.legendary.*:
+    description: donne toutes les permissions lié aux houe legendary
+    default: op
+    children:
+      oerthyon.factionitems.hoe.legendary.give: true
+      oerthyon.factionitems.hoe.legendary.use: true
+
+  oerthyon.factionitems.hoe.legendary.give:
+    description: donne la permission de se give une houe legendary
+    default: false
+
+  oerthyon.factionitems.hoe.legendary.use:
+    description: donne la permission d'utiliser une houe legendary
+    default: true
+
+  oerthyon.factionitems.hoe.epic.*:
+    description: donne toutes les permissions lié aux houe epic
+    default: op
+    children:
+      oerthyon.factionitems.hoe.epic.give: true
+      oerthyon.factionitems.hoe.epic.use: true
+
+  oerthyon.factionitems.hoe.epic.give:
+    description: donne la permission de se give une houe epic
+    default: false
+
+  oerthyon.factionitems.hoe.epic.use:
+    description: donne la permission d'utiliser une houe epic
     default: true

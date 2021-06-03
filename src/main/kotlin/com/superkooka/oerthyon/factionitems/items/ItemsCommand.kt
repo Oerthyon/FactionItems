@@ -4,6 +4,8 @@ import com.superkooka.oerthyon.factionitems.ItemNotFoundException
 import com.superkooka.oerthyon.factionitems.Main
 import com.superkooka.oerthyon.factionitems.items.chunkbuster.Chunkbuster
 import com.superkooka.oerthyon.factionitems.items.dynamite.Dynamite
+import com.superkooka.oerthyon.factionitems.items.houe.EpicHoe
+import com.superkooka.oerthyon.factionitems.items.houe.LegendaryHoe
 import com.superkooka.oerthyon.factionitems.items.pickaxe.EpicPickaxe
 import com.superkooka.oerthyon.factionitems.items.pickaxe.LegendaryPickaxe
 import com.superkooka.oerthyon.factionitems.items.sword.EpicSword
@@ -120,6 +122,8 @@ class ItemsCommand : CommandExecutor {
             "chunkbuster" -> player.hasPermission("oerthyon.factionitems.chunkbuster.give")
             "dynamite" -> player.hasPermission("oerthyon.factionitems.dynamite.give")
             "sword:epic" -> player.hasPermission("oerthyon.factionitems.sword.epic.give")
+            "hoe:epic" -> player.hasPermission("oerthyon.factionitems.hoe.epic.give")
+            "hoe:legendary" -> player.hasPermission("oerthyon.factionitems.hoe.legendary.give")
             "pickaxe:epic" -> player.hasPermission("oerthyon.factionitems.pickaxe.epic.give")
             "pickaxe:legendary" -> player.hasPermission("oerthyon.factionitems.pickaxe.legendary.give")
             else -> throw ItemNotFoundException()
@@ -135,6 +139,8 @@ class ItemsCommand : CommandExecutor {
                     (options.getOrNull(1)?.toBoolean() ?: Main.configuration.getBoolean("dynamite.fire", true)),
                 )
                 "sword:epic" -> EpicSword.give()
+                "hoe:epic" -> EpicHoe.give()
+                "hoe:legendary" -> LegendaryHoe.give()
                 "pickaxe:epic" -> EpicPickaxe.give()
                 "pickaxe:legendary" -> LegendaryPickaxe.give()
                 else -> throw ItemNotFoundException()
