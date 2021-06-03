@@ -20,14 +20,14 @@ class PickaxeBreakBlockListener : Listener {
         val tool = event.player.itemInHand
 
         val (range, luckLevel) = when (true) {
-            EpicPickaxe.isEpicPickaxe(tool) -> Pair(-1..1, 0)
-            LegendaryPickaxe.isLegendaryPickaxe(tool) -> Pair(-2..2, LegendaryPickaxe.LUCK_LEVEL)
+            EpicPickaxe.isEpicPickaxe(tool) -> Pair(Triple(-1..1, -1..-1, -1..1), 0)
+            LegendaryPickaxe.isLegendaryPickaxe(tool) -> Pair(Triple(-2..2, -1..3, -2..2), LegendaryPickaxe.LUCK_LEVEL)
             else -> return
         }
 
-        for (xOff in range) {
-            for (yOff in range) {
-                for (zOff in range) {
+        for (xOff in range.first) {
+            for (yOff in range.second) {
+                for (zOff in range.third) {
                     val block = event.block.getRelative(xOff, yOff, zOff)
                     block.getDrops(tool).forEach { item ->
                         val smeltedItem: ItemStack? = when (item.type) {
