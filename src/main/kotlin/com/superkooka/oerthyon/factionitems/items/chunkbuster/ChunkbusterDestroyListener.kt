@@ -13,27 +13,15 @@ class ChunkbusterDestroyListener : Listener {
 
     @EventHandler
     fun onChunkbusterDestroyed(event: PlayerInteractEvent) {
-        val message_variable: HashMap<String, String> = HashMap()
-        message_variable["player"] = event.player.displayName
+        if (!Chunkbuster.isChunkbuster(event.clickedBlock)) return
+        if (Action.LEFT_CLICK_BLOCK != event.action || null == event.clickedBlock) return
 
-        if (!Chunkbuster.isChunkbuster(event.clickedBlock)) {
-            return
-        }
-
-        if (Action.LEFT_CLICK_BLOCK != event.action || null == event.clickedBlock) {
-            return
-        }
-
-        val location: Location = event.clickedBlock.location
         event.isCancelled = true
 
-        if (null == event.item) {
-            return
-        }
+        if (null == event.item) return
+        if (Material.IRON_PICKAXE != event.item.type && Material.DIAMOND_PICKAXE != event.item.type) return
 
-        if (Material.IRON_PICKAXE != event.item.type && Material.DIAMOND_PICKAXE != event.item.type) {
-            return
-        }
+        val location: Location = event.clickedBlock.location
 
         if (Chunkbuster.placed_chunkbuster[location] == true) {
             event.player.sendMessage(
@@ -42,7 +30,7 @@ class ChunkbusterDestroyListener : Listener {
                         "chunkbuster.messages.already_active",
                         "§l§4Attention...§r Ce chunkbuster est déjà prêt à exploser"
                     ),
-                    message_variable
+                    hashMapOf(Pair("player_name", event.player.displayName))
                 )
             )
 

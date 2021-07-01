@@ -7,12 +7,14 @@ import org.bukkit.inventory.ItemStack
 
 object EpicPickaxe {
 
+    const val displayName = "§r§4Pioche Epic"
+
     @JvmStatic
     fun give(): ItemStack {
         var item = ItemStack(Material.DIAMOND_PICKAXE)
 
         val itemMeta = item.itemMeta
-        itemMeta.displayName = "§r§4Pioche Epic"
+        itemMeta.displayName = displayName
         item.itemMeta = itemMeta
 
         item.addEnchantment(Enchantment.DIG_SPEED, 5)

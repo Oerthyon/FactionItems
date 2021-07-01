@@ -20,17 +20,16 @@ class DynamitePlaceListener : Listener {
 
         event.isCancelled = true
 
-        val message_variable = HashMap<String, String>()
-        message_variable["player_name"] = event.player.displayName
+        val messageVariable = hashMapOf(Pair("player_name", event.player.displayName))
 
         if (!event.player.hasPermission("oerthyon.factionitems.dynamite.use")) {
             event.player.sendMessage(
                 StringUtils.parse(
                     Main.configuration.getString(
-                        "dynamite.messages.not_enough_permission",
+                        "global.messages.not_enough_permission_to_use_it",
                         "Vous n'avez pas la permission d'utiliser cette dynamite"
                     ),
-                    message_variable
+                    messageVariable
                 )
             )
 
@@ -53,13 +52,13 @@ class DynamitePlaceListener : Listener {
             override fun run() {
                 tick_elapsed++
 
-                message_variable["countdown"] = (countdown - tick_elapsed / 20).toString()
+                messageVariable["countdown"] = (countdown - tick_elapsed / 20).toString()
 
                 holotext.text = StringUtils.parse(
                     Main.configuration.getString(
                         "dynamite.messages.placeholder",
                         "Explosion dans §l§4{{countdown}}§r secondes"
-                    ), message_variable
+                    ), messageVariable
                 )
 
                 if (tick_elapsed / 20 >= countdown) {

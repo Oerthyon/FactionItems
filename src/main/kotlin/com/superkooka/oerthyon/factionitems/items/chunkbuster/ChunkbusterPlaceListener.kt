@@ -11,16 +11,11 @@ class ChunkbusterPlaceListener : Listener {
 
     @EventHandler
     fun onChunkbusterPlaced(event: BlockPlaceEvent) {
-        if (!Chunkbuster.isChunkbuster(event.itemInHand)) {
-            return
-        }
+        if (!Chunkbuster.isChunkbuster(event.itemInHand)) return
 
         val fplayer: FPlayer = FPlayers.getInstance().getByPlayer(event.player) ?: return
         val fchunk = FLocation(event.blockPlaced.world.name, event.blockPlaced.chunk.x, event.blockPlaced.chunk.z)
         val faction: Faction = Factions.getInstance().getFactionById(fplayer.factionId)
-
-        val message_variable: HashMap<String, String> = HashMap()
-        message_variable["player"] = event.player.displayName
 
         if (
             !event.player.hasPermission("oerthyon.factionitems.chunkbuster.use_everywhere") &&
@@ -30,9 +25,9 @@ class ChunkbusterPlaceListener : Listener {
             event.player.sendMessage(
                 StringUtils.parse(
                     Main.configuration.getString(
-                        "chunkbuster.messages.not_enough_permission_to_place_it",
+                        "global.messages.not_enough_permission_to_place_it",
                         "Vous n'avez pas la permission de placer un chunkbuster ici"
-                    ), message_variable
+                    ), hashMapOf(Pair("player_name", event.player.displayName), Pair("block_name", "chunkbuster"))
                 )
             )
 

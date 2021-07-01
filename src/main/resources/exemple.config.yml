@@ -1,0 +1,47 @@
+global:
+  messages:
+    # {{player_name}}, {{item_name}}
+    not_enough_permission_to_use_it: "Vous n'avez pas les permissions d'utiliser cette item"
+    # {{player_name}}, {{block_name}}
+    not_enough_permission_to_place_it: "Vous n'avez pas les permissions de placer ce block"
+    # {{player_name}}
+    not_enough_permission_to_execute_it: "Vous n'avez pas les permissions d'executer cette commande"
+    # {{player_name}}, {{item_name}}
+    item_does_not_exist: "Cet item n'existe pas"
+    # {{player_name}}
+    unable_to_find_player: "Impossible de trouver ce joueur"
+    # {{item_name}}
+    unable_to_find_item: "Impossible de trouver cet item"
+
+chunkbuster:
+  countdown: 4
+  messages:
+    # {{countdown}}
+    placeholder: "Explosion dans §l§4{{countdown}}§r secondes"
+    already_active: "§l§4Attention...§r Ce chunkbuster est déjà prêt à exploser"
+
+dynamite:
+  countdown: 2
+  power: 4
+  fire: true
+  messages:
+    # {{countdown}}
+    placeholder: "Explosion dans §l§4{{countdown}}§r secondes"
+
+rtp:
+  cooldown: 10
+  overworld:
+    min_x: -1000
+    max_x: 1000
+    min_z: -1000
+    max_z: 1000
+  nether:
+    min_x: -1000
+    max_x: 1000
+    min_z: -1000
+    max_z: 1000
+  messages:
+    bad_dimension: "Vous devez être dans l'overworld ou le nether pour utiliser cette commande"
+    unable_to_find_location: "Impossible de trouver un endroit ou vous téléporter"
+    cooldown_unfinished: "Veuillez attendre {{cooldown_remaining}} secondes"
+  max_iteration_before_finding_position: 100000

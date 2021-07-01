@@ -7,8 +7,8 @@ import org.bukkit.inventory.ItemStack
 
 object LegendaryPickaxe {
 
-    @JvmStatic
-    val LUCK_LEVEL = 2
+    const val displayName = "§r§4Pioche Légendaire"
+    const val LUCK_LEVEL = 2
 
     @JvmStatic
     fun give(): ItemStack {

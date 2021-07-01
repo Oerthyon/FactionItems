@@ -1,5 +1,7 @@
 package com.superkooka.oerthyon.factionitems.items.pickaxe
 
+import com.superkooka.oerthyon.factionitems.Main
+import com.superkooka.oerthyon.factionitems.utils.StringUtils
 import net.minecraft.server.v1_8_R3.Block
 import org.bukkit.Material
 import org.bukkit.craftbukkit.v1_8_R3.CraftWorld
@@ -17,7 +19,27 @@ class PickaxeBreakBlockListener : Listener {
 
     @EventHandler
     fun onPickaxeBreakBlock(event: BlockBreakEvent) {
-        val tool = event.player.itemInHand
+        val player = event.player
+        val tool = player.itemInHand
+
+        val (hasPermission, itemName) = when (true) {
+            EpicPickaxe.isEpicPickaxe(tool) -> Pair(player.hasPermission("oerthyon.factionitems.pickaxe.epic.use"), EpicPickaxe.displayName)
+            LegendaryPickaxe.isLegendaryPickaxe(tool) -> Pair(player.hasPermission("oerthyon.factionitems.pickaxe.legendary.use"), LegendaryPickaxe.displayName)
+            else -> return
+        }
+
+        if (!hasPermission) {
+            player.sendMessage(
+                StringUtils.parse(
+                    Main.configuration.getString(
+                        "global.messages.not_enough_permission_to_use_it",
+                        "Vous n'avez pas la permission d'utiliser cette pioche"
+                    ), hashMapOf(Pair("player", player.displayName), Pair("item_name", itemName))
+                )
+            )
+            event.isCancelled = true
+            return
+        }
 
         val (range, luckLevel) = when (true) {
             EpicPickaxe.isEpicPickaxe(tool) -> Pair(Triple(-1..1, -1..-1, -1..1), 0)
@@ -29,6 +51,9 @@ class PickaxeBreakBlockListener : Listener {
             for (yOff in range.second) {
                 for (zOff in range.third) {
                     val block = event.block.getRelative(xOff, yOff, zOff)
+
+                    if (!isBreakableBlock(block.type)) continue
+
                     block.getDrops(tool).forEach { item ->
                         val smeltedItem: ItemStack? = when (item.type) {
                             Material.IRON_ORE -> ItemStack(Material.IRON_INGOT)
@@ -58,6 +83,18 @@ class PickaxeBreakBlockListener : Listener {
                     }
                 }
             }
+        }
+    }
+
+    fun isBreakableBlock(material: Material): Boolean {
+        return when (material) {
+            Material.BARRIER -> false
+            Material.BEDROCK -> false
+            Material.COMMAND -> false
+            Material.ENDER_PORTAL -> false
+            Material.ENDER_PORTAL_FRAME -> false
+            Material.PORTAL -> false
+            else -> true
         }
     }
 }

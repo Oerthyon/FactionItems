@@ -30,86 +30,47 @@ class ItemsCommand : CommandExecutor {
             0, 1, 2 -> {
                 return false
             }
-            3 -> {
-                val player = Bukkit.getPlayer(arguments[1])
-                if (null === player) {
-                    sender?.sendMessage("Impossible de trouver ce joueur")
-                    return false
-                }
-
-                try {
-                    if (!hasPermission(player, arguments[2])) {
-                        player.sendMessage(
-                            StringUtils.parse(
-                                Main.configuration.getString(
-                                    "messages.not_enough_permission",
-                                    "Vous n'avez pas la permission d'executer cette commande"
-                                ),
-                                hashMapOf(Pair("player", player.displayName))
-                            )
-                        )
-                        return true
-                    }
-
-                    val items = getItem(arguments[2])
-                    player.inventory.addItem(*items)
-                } catch (e: ItemNotFoundException) {
-                    player.sendMessage("Cet item n'existe pas :/")
-                }
-            }
-            4 -> {
-                val player = Bukkit.getPlayer(arguments[1])
-                if (null === player) {
-                    sender?.sendMessage("Impossible de trouver ce joueur")
-                    return false
-                }
-
-                try {
-                    if (!hasPermission(player, arguments[2])) {
-                        player.sendMessage(
-                            StringUtils.parse(
-                                Main.configuration.getString(
-                                    "messages.not_enough_permission",
-                                    "Vous n'avez pas la permission d'executer cette commande"
-                                ),
-                                hashMapOf(Pair("player_name", player.displayName))
-                            )
-                        )
-                        return true
-                    }
-
-                    val items = getItem(arguments[2], arguments[3].toInt())
-                    player.inventory.addItem(*items)
-                } catch (e: ItemNotFoundException) {
-                    player.sendMessage("Cet item n'existe pas :/")
-                }
-            }
             else -> {
+                if (sender is Player && !hasPermission(sender, arguments[2])) {
+                    sender.sendMessage(
+                        StringUtils.parse(
+                            Main.configuration.getString(
+                                "global.messages.not_enough_permission_to_execute_it",
+                                "Vous n'avez pas la permission d'executer cette commande"
+                            ),
+                            hashMapOf(Pair("player_name", sender.displayName))
+                        )
+                    )
+                    return true
+                }
+
                 val player = Bukkit.getPlayer(arguments[1])
                 if (null === player) {
-                    sender?.sendMessage("Impossible de trouver ce joueur")
+                    if (sender is Player) sender.sendMessage(
+                        StringUtils.parse(
+                            Main.configuration.getString(
+                                "global.messages.unable_to_find_player",
+                                "Impossible de trouver ce joueur"
+                            ),
+                            hashMapOf(Pair("player_name", arguments[1]))
+                        )
+                    )
                     return false
                 }
 
                 try {
-                    if (!hasPermission(player, arguments[2])) {
-                        player.sendMessage(
-                            StringUtils.parse(
-                                Main.configuration.getString(
-                                    "messages.not_enough_permission",
-                                    "Vous n'avez pas la permission d'executer cette commande"
-                                ),
-                                hashMapOf(Pair("player", player.displayName))
-                            )
-                        )
-                        return true
-                    }
-
-                    val items =
-                        getItem(arguments[2], arguments[3].toInt(), arguments.sliceArray(4 until arguments.size))
+                    val items = getItem(arguments[2], if (arguments.size > 2) arguments[3].toInt() else 1, arguments.sliceArray(4 until arguments.size))
                     player.inventory.addItem(*items)
                 } catch (e: ItemNotFoundException) {
-                    player.sendMessage("Cet item n'existe pas :/")
+                    if (sender is Player) sender.sendMessage(
+                        StringUtils.parse(
+                            Main.configuration.getString(
+                                "global.messages.unable_to_find_item",
+                                "Impossible de trouver cet item"
+                            ),
+                            hashMapOf(Pair("item_name", arguments[2]))
+                        )
+                    )
                 }
             }
         }

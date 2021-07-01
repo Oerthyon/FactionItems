@@ -17,24 +17,18 @@ class ChunkbusterActivationListener : Listener {
 
     @EventHandler
     fun onRightClickonChunkbuster(event: PlayerInteractEvent) {
-        if (event.isBlockInHand || Action.RIGHT_CLICK_BLOCK != event.action) {
-            return
-        }
+        if (event.isBlockInHand || Action.RIGHT_CLICK_BLOCK != event.action) return
+        if (!Chunkbuster.isChunkbuster(event.clickedBlock)) return
 
-        if (!Chunkbuster.isChunkbuster(event.clickedBlock)) {
-            return
-        }
-
-        val message_variable: HashMap<String, String> = HashMap()
-        message_variable["player"] = event.player.displayName
+        val messageVariable = hashMapOf(Pair("player_name", event.player.displayName), Pair("block_name", "Chunkbuster"))
 
         if (!event.player.hasPermission("oerthyon.factionitems.chunkbuster.use")) {
             event.player.sendMessage(
                 StringUtils.parse(
                     Main.configuration.getString(
-                        "countdown.messages.not_enough_permission_to_use",
-                        "Vous n'avez pas la permission d'utiliser ce Chunkbuster"
-                    ), message_variable
+                        "global.messages.not_enough_permission_to_use_it",
+                        "Vous n'avez pas la permission d'utiliser ce chunkbuster"
+                    ), messageVariable
                 )
             )
             return
@@ -56,13 +50,13 @@ class ChunkbusterActivationListener : Listener {
             override fun run() {
                 tick_elapsed++
 
-                message_variable["countdown"] = (countdown - tick_elapsed / 20).toString()
+                messageVariable["countdown"] = (countdown - tick_elapsed / 20).toString()
 
                 holotext.text = StringUtils.parse(
                     Main.configuration.getString(
                         "chunkbuster.messages.placeholder",
                         "Explosion dans §l§4{{countdown}}§r secondes"
-                    ), message_variable
+                    ), messageVariable
                 )
 
                 if (Chunkbuster.placed_chunkbuster[location] == false) {

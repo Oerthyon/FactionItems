@@ -31,10 +31,13 @@ class HoeInteractEvent : Listener {
             event.player.sendMessage(
                 StringUtils.parse(
                     Main.configuration.getString(
-                        "messages.not_enough_permission",
+                        "global.messages.not_enough_permission_to_use_it",
                         "Vous n'avez pas la permission d'utiliser cet item"
                     ),
-                    hashMapOf(Pair("player_name", event.player.displayName))
+                    hashMapOf(
+                        Pair("player_name", event.player.displayName),
+                        Pair("item_name", event.item.itemMeta.displayName)
+                    )
                 )
             )
             return
