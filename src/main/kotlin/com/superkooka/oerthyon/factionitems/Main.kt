@@ -5,6 +5,7 @@ import com.superkooka.oerthyon.factionitems.items.chunkbuster.*
 import com.superkooka.oerthyon.factionitems.items.dynamite.DynamitePlaceListener
 import com.superkooka.oerthyon.factionitems.items.dynamite.DynamiteExplosionListener
 import com.superkooka.oerthyon.factionitems.items.houe.HoeInteractEvent
+import com.superkooka.oerthyon.factionitems.items.houe.PlayerWalkOnSoulsandEvent
 import com.superkooka.oerthyon.factionitems.items.pickaxe.PickaxeBreakBlockListener
 import com.superkooka.oerthyon.factionitems.randomtp.RandomTPCommand
 import com.superkooka.oerthyon.factionitems.utils.Utf8YamlConfiguration
@@ -52,6 +53,7 @@ class Main : JavaPlugin() {
         Bukkit.getPluginManager().registerEvents(PickaxeBreakBlockListener(), this)
 
         Bukkit.getPluginManager().registerEvents(HoeInteractEvent(), this)
+        Bukkit.getPluginManager().registerEvents(PlayerWalkOnSoulsandEvent(), this)
     }
 
     override fun onDisable() {
