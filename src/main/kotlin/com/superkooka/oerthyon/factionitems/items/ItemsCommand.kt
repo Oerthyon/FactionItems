@@ -59,7 +59,7 @@ class ItemsCommand : CommandExecutor {
                 }
 
                 try {
-                    val items = getItem(arguments[2], if (arguments.size > 2) arguments[3].toInt() else 1, arguments.sliceArray(4 until arguments.size))
+                    val items = getItem(arguments[2], if (arguments.size > 3) arguments[3].toInt() else 1, arguments.sliceArray(4 until arguments.size))
                     player.inventory.addItem(*items)
                 } catch (e: ItemNotFoundException) {
                     if (sender is Player) sender.sendMessage(
