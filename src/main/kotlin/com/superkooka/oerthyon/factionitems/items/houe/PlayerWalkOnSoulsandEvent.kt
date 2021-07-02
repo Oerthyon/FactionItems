@@ -19,10 +19,8 @@ class PlayerWalkOnSoulsandEvent : Listener {
 
         if (Material.SOUL_SAND == event.from.block.type) {
             player.activePotionEffects.forEach { effect ->
-                if (effect.type == PotionEffectType.SPEED) {
-                    if (effect.amplifier > 1) {
-                        return
-                    }
+                if (effect.type == PotionEffectType.SPEED && effect.amplifier > 1) {
+                    return
                 }
             }
 
