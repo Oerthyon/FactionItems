@@ -7,7 +7,7 @@ import org.bukkit.inventory.ItemStack
 
 object EpicPickaxe {
 
-    const val displayName = "§r§4Pioche Epic"
+    const val displayName = "§7Pioche §dEpique"
 
     @JvmStatic
     fun give(): ItemStack {
@@ -15,6 +15,13 @@ object EpicPickaxe {
 
         val itemMeta = item.itemMeta
         itemMeta.displayName = displayName
+        itemMeta.lore = arrayListOf(
+            "§7§m»------------------------------«",
+            "      §c● §7Enchantement: §cEfficiency III, Unbreaking III",
+            "      §c● §7Cuit les minerais automatiquement",
+            "      §c● §7Mine §8[§c3x3§8]",
+            "§7§m»------------------------------«"
+        )
         item.itemMeta = itemMeta
 
         item.addEnchantment(Enchantment.DIG_SPEED, 5)

@@ -12,7 +12,15 @@ object EpicSword {
         var item = ItemStack(Material.DIAMOND_SWORD)
 
         val itemMeta = item.itemMeta
-        itemMeta.displayName = "§r§4Épée Epic"
+        itemMeta.displayName = "§7Epée §dEpique"
+        itemMeta.lore = arrayListOf(
+            "§7§m»------------------------------«",
+            "      §c● §7Enchantement: ",
+            "      §c● §cChatiment V",
+            "      §c● §cUnbreaking III",
+            "      §c● §cLooting V",
+            "§7§m»------------------------------«"
+        )
         item.itemMeta = itemMeta
 
         item.addEnchantment(Enchantment.DAMAGE_UNDEAD, 5)

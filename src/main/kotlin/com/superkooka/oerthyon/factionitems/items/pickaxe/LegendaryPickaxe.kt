@@ -7,7 +7,7 @@ import org.bukkit.inventory.ItemStack
 
 object LegendaryPickaxe {
 
-    const val displayName = "§r§4Pioche Légendaire"
+    const val displayName = "&7Pioche &bLégendaire"
     const val LUCK_LEVEL = 2
 
     @JvmStatic
@@ -15,7 +15,14 @@ object LegendaryPickaxe {
         var item = ItemStack(Material.DIAMOND_PICKAXE)
 
         val itemMeta = item.itemMeta
-        itemMeta.displayName = "§r§4Pioche Légendaire"
+        itemMeta.displayName = "§7Pioche §bLégendaire"
+        itemMeta.lore = arrayListOf(
+            "§7§m»------------------------------«",
+            "      §c● §7Enchantement: §cEfficiency V, Unbreaking III, Fortune II",
+            "      §c● §7Cuit les minerais automatiquement",
+            "      §c● §7Mine §8[§c5x5§8]",
+            "§7§m»------------------------------«"
+        )
         item.itemMeta = itemMeta
 
         item.addEnchantment(Enchantment.DIG_SPEED, 3)

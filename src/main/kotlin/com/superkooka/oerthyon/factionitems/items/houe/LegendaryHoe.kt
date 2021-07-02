@@ -11,7 +11,14 @@ object LegendaryHoe {
         var item = ItemStack(Material.DIAMOND_HOE)
 
         val itemMeta = item.itemMeta
-        itemMeta.displayName = "§r§4Houe Legendaire"
+        itemMeta.displayName = "§7Houe §bLégendaire"
+        itemMeta.lore = arrayListOf(
+            "§7§m»------------------------------«",
+            "      §c● §7Accélaration sur l''âmes du nether",
+            "      §c● §7Replantation auto. §8[§c5x5§8]",
+            "      §c● §7Enchantement: §cUnbreaking III",
+            "§7§m»------------------------------«",
+        )
         item.itemMeta = itemMeta
 
         item = NBT.set(item, "oerthyon.item_type", "hoe:legendary")
