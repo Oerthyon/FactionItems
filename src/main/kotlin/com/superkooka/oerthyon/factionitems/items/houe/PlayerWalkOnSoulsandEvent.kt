@@ -6,14 +6,10 @@ import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerMoveEvent
 import org.bukkit.inventory.ItemStack
-import java.util.*
+import org.bukkit.potion.PotionEffect
+import org.bukkit.potion.PotionEffectType
 
 class PlayerWalkOnSoulsandEvent : Listener {
-
-    companion object {
-        @JvmStatic
-        val playersOnSoulsand = hashMapOf<UUID, Float>() // Save original walkspeed for player before change it
-    }
 
     @EventHandler
     fun whenPlayerWalkOnSoulsand(event: PlayerMoveEvent) {
@@ -21,18 +17,17 @@ class PlayerWalkOnSoulsandEvent : Listener {
         val item = player.itemInHand ?: return
         if (!hasPermission(player, item)) return
 
-        print(player.walkSpeed)
-
         if (Material.SOUL_SAND == event.from.block.type) {
-            if (!playersOnSoulsand.containsKey(player.uniqueId)) {
-                playersOnSoulsand[player.uniqueId] = player.walkSpeed
-                player.walkSpeed = 0.5F
+            player.activePotionEffects.forEach { effect ->
+                if (effect.type == PotionEffectType.SPEED) {
+                    if (effect.amplifier > 1) {
+                        return
+                    }
+                }
             }
-        } else {
-            if (playersOnSoulsand.containsKey(player.uniqueId)) {
-                player.walkSpeed = playersOnSoulsand[player.uniqueId] ?: 0.2F
-                playersOnSoulsand.remove(player.uniqueId)
-            }
+
+            player.removePotionEffect(PotionEffectType.SPEED)
+            player.addPotionEffect(PotionEffect(PotionEffectType.SPEED, 30, 1))
         }
     }
 
