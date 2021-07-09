@@ -125,7 +125,7 @@ class RandomTPCommand : CommandExecutor {
             )
             location.z = Random.nextDouble(
                 Main.configuration.getDouble("random_tp.overworld.min_z", -1000.0),
-                Main.configuration.getDouble("random_tp.overworld.max_z", -1000.0)
+                Main.configuration.getDouble("random_tp.overworld.max_z", 1000.0)
             )
             location.y = world.getHighestBlockYAt(location.x.toInt(), location.z.toInt()) + 1.0
 
@@ -151,7 +151,7 @@ class RandomTPCommand : CommandExecutor {
             )
             location.z = Random.nextDouble(
                 Main.configuration.getDouble("random_tp.nether.min_z", -1000.0),
-                Main.configuration.getDouble("random_tp.nether.max_z", -1000.0)
+                Main.configuration.getDouble("random_tp.nether.max_z", 1000.0)
             )
 
             var j = 0
