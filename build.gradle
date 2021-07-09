@@ -54,6 +54,6 @@ dependencies {
 
 shadowJar {
     destinationDirectory = "./build/" as File
-    archiveFileName = "${archiveBaseName.get()}-${getVersion()}.jar"
+    archiveFileName = "${archiveBaseName.get()}-${archiveVersion.get()}.jar"
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }
