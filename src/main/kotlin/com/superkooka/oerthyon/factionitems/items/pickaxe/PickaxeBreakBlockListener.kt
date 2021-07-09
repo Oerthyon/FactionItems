@@ -42,7 +42,7 @@ class PickaxeBreakBlockListener : Listener {
         }
 
         val (range, luckLevel) = when (true) {
-            EpicPickaxe.isEpicPickaxe(tool) -> Pair(Triple(-1..1, -1..-1, -1..1), 0)
+            EpicPickaxe.isEpicPickaxe(tool) -> Pair(Triple(-1..1, -1..1, -1..1), 0)
             LegendaryPickaxe.isLegendaryPickaxe(tool) -> Pair(Triple(-2..2, -1..3, -2..2), LegendaryPickaxe.LUCK_LEVEL)
             else -> return
         }
@@ -86,7 +86,7 @@ class PickaxeBreakBlockListener : Listener {
         }
     }
 
-    fun isBreakableBlock(material: Material): Boolean {
+    private fun isBreakableBlock(material: Material): Boolean {
         return when (material) {
             Material.BARRIER -> false
             Material.BEDROCK -> false
