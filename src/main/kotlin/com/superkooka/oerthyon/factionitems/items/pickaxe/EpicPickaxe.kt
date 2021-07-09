@@ -24,7 +24,7 @@ object EpicPickaxe {
         )
         item.itemMeta = itemMeta
 
-        item.addEnchantment(Enchantment.DIG_SPEED, 5)
+        item.addEnchantment(Enchantment.DIG_SPEED, 3)
         item.addEnchantment(Enchantment.DURABILITY, 3)
 
         item = NBT.set(item, "oerthyon.item_type", "pickaxe:epic")
