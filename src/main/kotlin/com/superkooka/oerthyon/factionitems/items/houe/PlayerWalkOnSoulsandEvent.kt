@@ -1,47 +1,31 @@
 package com.superkooka.oerthyon.factionitems.items.houe
 
-import com.superkooka.oerthyon.factionitems.Main
-import org.bukkit.Bukkit
 import org.bukkit.Material
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerMoveEvent
 import org.bukkit.inventory.ItemStack
-import org.bukkit.potion.PotionEffect
-import org.bukkit.potion.PotionEffectType
-import org.bukkit.scheduler.BukkitRunnable
 import java.util.*
 
 class PlayerWalkOnSoulsandEvent : Listener {
 
     companion object {
         @JvmStatic
-        val playerWithOurSpeedEffect = arrayListOf<UUID>()
+        val playersWalkSpeed = arrayListOf<UUID>()
     }
 
     @EventHandler
     fun whenPlayerWalkOnSoulsand(event: PlayerMoveEvent) {
         val player = event.player
-        val item = player.itemInHand ?: return
-        if(event.from.x == event.to.x && event.from.y == event.to.y && event.from.z == event.from.z) return // Yaw and Pitch also trigger this event
-        if (!hasPermission(player, item)) return
+        val item = player.itemInHand
 
-
-        if (Material.SOUL_SAND == event.from.block.type) {
-            player.activePotionEffects.forEach { effect ->
-                if (effect.type == PotionEffectType.SPEED && !playerWithOurSpeedEffect.contains(player.uniqueId)) {
-                    return
-                }
-            }
-
-            player.removePotionEffect(PotionEffectType.SPEED)
-            player.addPotionEffect(PotionEffect(PotionEffectType.SPEED, 10, 1))
-
-            playerWithOurSpeedEffect.add(player.uniqueId)
-            Bukkit.getScheduler().runTaskLater(Main.instance, {
-                playerWithOurSpeedEffect.remove(player.uniqueId)
-            }, 10)
+        if (Material.SOUL_SAND == event.from.block.type && !playersWalkSpeed.contains(player.uniqueId) && hasPermission(player, item)) {
+            player.walkSpeed /= 0.4f
+            playersWalkSpeed.add(player.uniqueId)
+        } else if (Material.SOUL_SAND != event.from.block.type && Material.AIR != event.from.block.type && playersWalkSpeed.contains(player.uniqueId)) {
+            player.walkSpeed *= 0.4f
+            playersWalkSpeed.remove(player.uniqueId)
         }
     }
 
