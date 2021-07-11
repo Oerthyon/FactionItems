@@ -50,11 +50,17 @@ class HoeInteractEvent : Listener {
         for (xOff in range) {
             for (zOff in range) {
                 val relativeBlock = block.getRelative(xOff, 0, zOff)
-                val materialOfRelativeBlock = relativeBlock.type
 
-                if (isCrop(relativeBlock) && block.data == 7.toByte())  { //TODO: Change this deprecated way)
+                if (isCrop(relativeBlock) && relativeBlock.data == maxAge(relativeBlock.type))  { //TODO: Change this deprecated way)
+                    val cropMaterial = relativeBlock.type
+                    val breakItem = blockToItem(cropMaterial)
+
                     relativeBlock.breakNaturally(item)
-                    relativeBlock.type = materialOfRelativeBlock
+
+                    if (event.player.inventory.containsAtLeast(breakItem, 1)) {
+                        event.player.inventory.removeItem(breakItem)
+                        relativeBlock.type = cropMaterial
+                    }
                 }
             }
         }
@@ -62,8 +68,28 @@ class HoeInteractEvent : Listener {
 
     private fun isCrop(block: Block): Boolean {
         return when (block.type) {
-            Material.POTATO, Material.CARROT, Material.PUMPKIN, Material.MELON, Material.CROPS -> true
+            Material.POTATO, Material.CARROT, Material.CROPS, Material.NETHER_WARTS -> true
             else -> false
+        }
+    }
+
+    private fun maxAge(material: Material): Byte {
+        return when (material) {
+            Material.CARROT -> 7
+            Material.POTATO -> 7
+            Material.CROPS -> 7
+            Material.NETHER_WARTS -> 3
+            else -> throw IllegalArgumentException()
+        }
+    }
+
+    private fun blockToItem(material: Material): ItemStack {
+        return when (material) {
+            Material.CARROT -> ItemStack(Material.CARROT_ITEM)
+            Material.POTATO -> ItemStack(Material.POTATO_ITEM)
+            Material.CROPS -> ItemStack(Material.WHEAT)
+            Material.NETHER_WARTS -> ItemStack(Material.NETHER_STALK)
+            else -> throw IllegalArgumentException()
         }
     }
 
